@@ -13,6 +13,11 @@
 	<![endif]-->
 
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+	<?php
+		foreach ( $this->getModule()->jsIncludes as $src ) {
+			echo '<script src="' . $this->getModule()->_assetsUrl  . "/js/${src}.js\"></script>\n";
+		}
+	?>
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
@@ -23,6 +28,8 @@
 <body>
 
 <div class="container" id="page">
+
+	
 
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(

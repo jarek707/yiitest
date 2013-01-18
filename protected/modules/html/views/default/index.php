@@ -9,3 +9,5 @@
 		<div ng-controller='firstCtrl'>
 		Name: {{name()}}
 		</div>
+
+<?php echo $this->rules; ?>
