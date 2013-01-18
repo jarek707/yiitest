@@ -28,6 +28,8 @@ return array(
 			//'ipFilters'=>array('127.0.0.1','172.16.133.128','10.10.10.3') 
 			'ipFilters'=>array('*')
 		),
+		'api',
+		'html'
 	),
 
 	// application components
