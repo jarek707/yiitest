@@ -3,15 +3,16 @@
 class HtmlModule extends CWebModule
 {
 	public $jsIncludes =  ['controller','directives','services'];
-	public $_assetsUrl;
+	public $assetsUrl;
+	public $regenerateAssets;
 
 	public function init()
 	{
 		$this->layout = '/layouts/html';
 
-		if ( $this->_assetsUrl === null ) {
-			$this->_assetsUrl = Yii::app()->getAssetManager()->publish(
-				Yii::getPathOfAlias('html.assets') );
+		if ( $this->assetsUrl === null && $this->regenerateAssets ) {
+			$this->assetsUrl = Yii::app()->getAssetManager()->publish(
+				Yii::getPathOfAlias('assets'), false, -1, $this->regenerateAssets );
 		}
 		// import the module-level models and components
 		$this->setImport(array(

@@ -15,7 +15,7 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
 	<?php
 		foreach ( $this->getModule()->jsIncludes as $src ) {
-			echo '<script src="' . $this->getModule()->_assetsUrl  . "/js/${src}.js\"></script>\n";
+			echo '<script src="' . $this->getModule()->assetsUrl  . "/js/${src}.js\"></script>\n";
 		}
 	?>
 
@@ -28,8 +28,6 @@
 <body>
 
 <div class="container" id="page">
-
-	
 
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(

@@ -2,6 +2,9 @@
 
 class SiteController extends Controller
 {
+	public $jsIncludes =  ['app','directives','services','controller','jquery'];
+	public $assetsUrl;
+	public $regenerateAssets = true;
 	/**
 	 * Declares class-based actions.
 	 */
@@ -29,6 +32,11 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
+		if ( $this->assetsUrl === null && $this->regenerateAssets ) {
+			$this->assetsUrl = Yii::app()->getAssetManager()->publish(
+				Yii::getPathOfAlias('application.assets'), false, -1, $this->regenerateAssets );
+		}
+
 		$this->render('index');
 	}
 
