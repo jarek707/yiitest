@@ -1,0 +1,15 @@
+<div ng-controller='customerCtrl' ng-show='showOne'>
+	<ul>
+		<li>Name: {{customer.name}}</li>
+		<li>Id: {{customer.id}}</li>
+	</ul>
+</div>
+
+<div ng-controller='listCtrl'>
+	<ul ng-repeat='list in lists'>
+		<li class="button"><button value='view' ng-click='view(list)' />view</li>
+		<li>Name: {{list.name}}</li>
+		<li>Id: {{list.id}}</li>
+	</ul>
+</div>
+

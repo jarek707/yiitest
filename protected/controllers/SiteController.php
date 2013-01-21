@@ -2,7 +2,10 @@
 
 class SiteController extends Controller
 {
-	public $jsIncludes =  ['app','directives','services','controller','jquery'];
+	public static $angularJsIncludes  =  ['app','directives','services','controller','jquery'];
+	public static $angularCssIncludes =  ['style'];
+	public $jsIncludes = [];
+	public $cssIncludes = [];
 	public $assetsUrl;
 	public $regenerateAssets = true;
 	/**
@@ -32,6 +35,9 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
+		$this->jsIncludes = self::$angularJsIncludes;
+		$this->cssIncludes = self::$angularCssIncludes;
+
 		if ( $this->assetsUrl === null && $this->regenerateAssets ) {
 			$this->assetsUrl = Yii::app()->getAssetManager()->publish(
 				Yii::getPathOfAlias('application.assets'), false, -1, $this->regenerateAssets );

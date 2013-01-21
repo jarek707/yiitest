@@ -1,6 +1,6 @@
 <?php
 
-class PurchaseController extends CController
+class PurchaseController extends Controller
 {
 
 	public function actionIndex()
@@ -60,6 +60,22 @@ class PurchaseController extends CController
 				}
 			} else {
 				$this->renderPartial('failed', ['msg' => 'Id is required for updates' . json_encode($_POST) ] );
+			}
+
+		} else {
+			$this->renderPartial('failed', ['msg' => $validateMsg ] );
+		}
+	}
+
+	public function actionList() {
+		// Authenticate and Authorize here
+
+		if ( $validateMsg = $this->validate( $_POST ) ) {
+
+			try {
+				$this->renderPartial('data', ['data' => (( new Purchase() )->all( $_POST, false ))]);
+			} catch ( \Exception $e ) {
+				$this->renderPartial('failed', ['msg' => $e->getMessage() ] );
 			}
 
 		} else {

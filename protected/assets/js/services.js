@@ -17,6 +17,12 @@ value('api', {
 			$.post( App.cfg.baseUrl + route + '/set', data ).success(
 				function( data ) { if ( typeof cb != 'undefined' ) cb( data ); }
 			);
+		},
+
+		list: function( route, $http, cb ) {
+			$http.get( App.cfg.baseUrl + route + '/list').success(
+				function( data ) { if ( typeof cb != 'undefined' ) cb( data ); }
+			);
 		}
 	}
 )

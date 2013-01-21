@@ -61,6 +61,8 @@ class Purchase extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'customer' => [ self::BELONGS_TO, 'Customer','customer_id' ],
+			'merchant' => [ self::BELONGS_TO, 'Merchant','merchant_id' ]
 		);
 	}
 
@@ -132,15 +134,36 @@ class Purchase extends CActiveRecord
 	}
 
 	public function find( $id ) {
-		return $this->export( $this->findByPk( $id ) );
+		$res = $this->with('customer')->findByPk( $id );
+		return $this->export( $res, true );
 	}
 
-	public function export( $purchase ) {
+	public function defaultScope() {
+		return [
+			'condition' => ''
+		];
+	}
+
+	public function all( $id ) {
+		$res = $this->findAll();
 		$retA = [];
-		foreach ( $this->attributeLabels() as $key => $dummy ) {
-			$retA[$key] = $purchase[$key];
+		foreach ( $res as $row ) {
+			$retA[] = $this->export( $row, true );	
 		}
 
 		return $retA;
+	}
+
+	public function export( $row, $includeRelations=false ) {
+		$retA = $merged = [];
+
+		foreach ( $this->attributeLabels() as $key => $dummy )
+			$retA[$key] = $row[$key];
+
+		if ( $includeRelations )
+			foreach( $this->relations() as $relation => $relationA ) 
+				$merged[$relation] = (new $relationA[1]())->export( $row->$relation );
+
+		return array_merge( ['main' => $retA ], $merged );
 	}
 }

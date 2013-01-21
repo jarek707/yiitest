@@ -17,6 +17,10 @@
 		foreach ( $this->jsIncludes as $src ) {
 			echo '<script src="' . $this->assetsUrl  . "/js/${src}.js\"></script>\n";
 		}
+		foreach ( $this->cssIncludes as $src ) {
+			echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"{$this->assetsUrl}/css/${src}.css\" media=\"screen\" />";
+		}
+
 	?>
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
@@ -36,9 +40,10 @@
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
+				array('label'=>'Landing', 'url'=>array('/')),
+				array('label'=>'List', 'url'=>array('/#/list', )),
+				array('label'=>'Customers', 'url'=>array('/#/customer')),
+				array('label'=>'Purchase', 'url'=>array('/#/purchase')),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
